@@ -1,6 +1,6 @@
 CC = gcc
 
-LDFLAGS = -lopenmpt -lpulse-simple -largp -lncurses
+LDFLAGS = -lopenmpt -lpulse-simple -lncurses
 CXXFLAGS = -Wall -Wextra -Iinclude/
 
 all: bin/yamp
