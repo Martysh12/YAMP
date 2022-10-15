@@ -1,9 +1,9 @@
 #include "args.h"
 
-#define doc "modplay -- play module files easily from your terminal"
+#define doc "YAMP -- play module files easily from your terminal"
 #define args_doc "FILE"
 
-const char* argp_program_version = "modplay 0.0.1";
+const char* argp_program_version = "YAMP 0.0.1";
 const char* argp_program_bug_address = "martyshkon@gmail.com";
 
 static struct argp_option options[] = {
