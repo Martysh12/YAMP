@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
 	s = pa_simple_new(
 			NULL,
-			"modplay",
+			"YAMP",
 			PA_STREAM_PLAYBACK,
 			NULL,
 			"Music",
