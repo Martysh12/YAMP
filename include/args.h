@@ -11,7 +11,7 @@ extern const char* argp_program_bug_address;
 
 typedef struct _parsedArgs {
 	char* file;
-	int loops;
+	unsigned int loops;
 	unsigned int volume;
 	unsigned int sampleRate;
 	bool useUi;
