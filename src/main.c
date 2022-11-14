@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	ParsedArgs* args = parseArguments(argc, argv);
 
 	if (args == NULL) // This shouldn't happen under normal circumstances, but
-		return 1; // just to be sure...
+		return 1;     // just to be sure...
 
 	FILE* file = fopen(args->file, "rb");
 	
