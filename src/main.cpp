@@ -6,14 +6,16 @@
 
 int main(int argc, char* argv[])
 {
-	if (argc < 2) {
+	if (argc < 2)
+	{
 		std::cout << "Usage: " << argv[0] << " FILE" << std::endl;
 		return 1;
 	}
 
 	std::ifstream file(argv[1]);
 
-	if (!file.is_open()) {
+	if (!file.is_open())
+	{
 		std::cout << "Couldn't open file " << std::quoted(argv[1]) << "." << std::endl;
 	}
 
@@ -22,7 +24,8 @@ int main(int argc, char* argv[])
 
 	yamp.play();
 
-	while (true) {
+	while (true) 
+	{
 		// ui.render();
 	}
 	
