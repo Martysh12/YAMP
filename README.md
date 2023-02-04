@@ -1,7 +1,7 @@
 <div align="center">
 
 # Yet Another Module Player
-Simple but cool-lookin' module player written in pure C.
+Simple but cool-lookin' module player written in C++.
 
 </div>
 
