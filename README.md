@@ -10,15 +10,24 @@ YAMP (or "modplay") was originally made on my phone to test [libmodplug](https:/
 After succeeding, I started adding more and more features (like argument parsing using argp, song information, UIs and [libopenmpt](https://lib.openmpt.org/libopenmpt/)).  
 Eventually I realized that this is a pretty cool project, so I converted the folder to a git repo and uploaded it to GitHub.
 
+## Building
+To build YAMP, create a directory named `build` inside the repository, and enter it:
+```sh
+mkdir build
+cd build
+```
+Create a Makefile using `cmake`:
+```sh
+cmake ..
+```
+And now compile it:
+```sh
+make
+```
+
 ## Usage
 To play a file, just execute `yamp module_file.mod`.
-Here is a list of available arguments:
-```
- -l, --loop[=COUNT]      Loop song COUNT times, or infinitely if no COUNT provided.
- -s, --sample-rate=RATE  Set sample rate to RATE.
- -u, --ui                The "infamous" UI mode. (shown in screenshots)
- -v, --volume=AMOUNT     Set volume (0-100). (DOESN'T WORK RIGHT NOW)
-```
+For help with different arguments, run `yamp --help`.
 
 ## Screenshots
 <img
