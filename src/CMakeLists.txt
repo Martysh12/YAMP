@@ -3,6 +3,7 @@ set(SOURCES
     yampplayer.cpp
     yampoptions.cpp
     yampportaudio.cpp
+    arguments.cpp
 )
 
 add_executable(yamp ${SOURCES})

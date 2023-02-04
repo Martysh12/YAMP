@@ -1,3 +1,4 @@
+#include "arguments.h"
 #include "yampplayer.h"
 
 #include <fstream>
@@ -6,28 +7,32 @@
 
 int main(int argc, char* argv[])
 {
-	if (argc < 2)
-	{
-		std::cout << "Usage: " << argv[0] << " FILE" << std::endl;
-		return 1;
-	}
+	Arguments args(argc, argv);
 
-	std::ifstream file(argv[1]);
+	std::ifstream file(args.file);
 
 	if (!file.is_open())
 	{
 		std::cout << "Couldn't open file " << std::quoted(argv[1]) << "." << std::endl;
 	}
 
-	YAMP::YAMPOptions options = YAMP::YAMPOptions::createDefault();
-	YAMP::YAMPPlayer yamp(file, options);
-
-	yamp.play();
-
-	while (true) 
+	YAMP::YAMPOptions options = args.createYAMPOptions();
+	
+	try
 	{
-		// ui.render();
+		YAMP::YAMPPlayer yamp(file, options);
+		yamp.play();
+
+		while (true) 
+		{
+			// ui.render();
+		}
 	}
+	catch (std::exception& e)
+	{
+		std::cout << "YAMP error: " << e.what() << std::endl;
+	}
+	
 	
 	return 0;
 }
