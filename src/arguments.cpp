@@ -12,9 +12,19 @@ error_t parseOption(int key, char* arg, argp_state* state)
     case 'r':
         args->sampleRate = strtol(arg, NULL, 10);
         
-        if (errno == ERANGE)
+        if (errno != 0 && args->sampleRate == 0)
         {
-            argp_error(state, "invalid integer for sample rate");
+            argp_error(state, "invalid sample rate");
+        }
+
+        break;
+
+    case 'v':
+        args->volume = strtol(arg, NULL, 10);
+        
+        if (errno != 0 && args->volume == 0)
+        {
+            argp_error(state, "invalid volume");
         }
 
         break;
@@ -60,13 +70,15 @@ error_t parseOption(int key, char* arg, argp_state* state)
 
 Arguments::Arguments(int argc, char* argv[]) :
     sampleRate(-1),
-    channels(-1)
+    channels(-1),
+    volume(INT_MIN)
 {
     std::string doc = "tracker music player";
     std::string argsDoc = "FILE";
 
     argp_option options[] = {
-        {"sample-rate", 'r', "RATE", 0, "Sample rate"},
+        {"sample-rate", 'r', "RATE",   0, "Sample rate"},
+        {"volume",      'v', "AMOUNT", 0, "Volume in decibel. Default: 0."},
         {"mono",        'm', 0,      0, "1 channel"},
         {"stereo",      's', 0,      0, "2 channels"},
         {"quad",        'q', 0,      0, "4 channels"},
@@ -83,6 +95,7 @@ YAMP::YAMPOptions Arguments::createYAMPOptions()
     YAMP::YAMPOptions options = YAMP::YAMPOptions::createDefault();
     if (sampleRate != -1) options.sampleRate = sampleRate;
     if (channels != -1)   options.channels = channels;
+    if (volume != INT_MIN)   options.volume = volume;
 
     return options;
 }

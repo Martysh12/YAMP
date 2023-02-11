@@ -17,6 +17,7 @@ struct Arguments
     std::string file;
     int sampleRate;
     int channels;
+    int volume;
 
     Arguments(int argc, char* argv[]);
     YAMP::YAMPOptions createYAMPOptions();
