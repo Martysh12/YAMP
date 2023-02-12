@@ -7,12 +7,15 @@ error_t parseOption(int key, char* arg, argp_state* state)
 {
     Arguments* args = reinterpret_cast<Arguments *>(state->input);
 
+    char* endptr = NULL; // Needed for strtol() error check
+
     switch (key)
     {
     case 'r':
-        args->sampleRate = strtol(arg, NULL, 10);
+        args->sampleRate = strtol(arg, &endptr, 10);
         
-        if (errno != 0 && args->sampleRate == 0)
+        // Skip the strtol() check, sample rate <1000 will cause a seg-fault.
+        if (args->sampleRate < 1000)
         {
             argp_error(state, "invalid sample rate");
         }
@@ -20,9 +23,9 @@ error_t parseOption(int key, char* arg, argp_state* state)
         break;
 
     case 'v':
-        args->volume = strtol(arg, NULL, 10);
+        args->volume = strtol(arg, &endptr, 10);
         
-        if (errno != 0 && args->volume == 0)
+        if (errno != 0 && args->volume == 0 && arg == endptr)
         {
             argp_error(state, "invalid volume");
         }
