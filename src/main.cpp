@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
 	if (!file.is_open())
 	{
 		std::cout << "Couldn't open file " << std::quoted(argv[1]) << "." << std::endl;
+        return 1;
 	}
 
 	YAMP::YAMPOptions options = args.createYAMPOptions();
@@ -31,6 +32,7 @@ int main(int argc, char* argv[])
 	catch (std::exception& e)
 	{
 		std::cout << "YAMP error: " << e.what() << std::endl;
+        return 1;
 	}
 	
 	
