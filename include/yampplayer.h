@@ -14,6 +14,8 @@ namespace YAMP
         openmpt::module m_module;
         PaStream* m_stream;
 
+        bool m_hasFinished;
+
         void checkPaError(PaError err);
 
     public:
@@ -22,6 +24,9 @@ namespace YAMP
 
         void play();
         int readNextSamples(int bufferSize, float* buffer);
+
+        bool hasFinished();
+        void setHasFinished(bool hasFinished);
     };
 };
 

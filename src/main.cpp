@@ -26,6 +26,10 @@ int main(int argc, char* argv[])
 
 		while (true) 
 		{
+			if (yamp.hasFinished())
+			{
+				break;
+			}
 			// ui.render();
 		}
 	}

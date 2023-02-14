@@ -10,7 +10,8 @@ void YAMP::YAMPPlayer::checkPaError(PaError err)
 
 YAMP::YAMPPlayer::YAMPPlayer(std::istream& file, YAMPOptions& options) :
     m_module(file),
-    m_options(options)
+    m_options(options),
+    m_hasFinished(false)
 {
     checkPaError(Pa_Initialize());
 
@@ -68,4 +69,14 @@ int YAMP::YAMPPlayer::readNextSamples(int bufferSize, float* buffer)
         }
         return bufferSize;
     }
+}
+
+bool YAMP::YAMPPlayer::hasFinished()
+{
+    return m_hasFinished;
+}
+
+void YAMP::YAMPPlayer::setHasFinished(bool hasFinished)
+{
+    m_hasFinished = hasFinished;
 }
