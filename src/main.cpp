@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <filesystem>
 
 int main(int argc, char* argv[])
 {
@@ -22,6 +23,27 @@ int main(int argc, char* argv[])
 	try
 	{
 		YAMP::YAMPPlayer yamp(file, options);
+
+		// Print some info
+		std::cout << "Filename........: " <<
+			std::filesystem::path(args.file).filename().string() << std::endl;
+		std::cout << "Title...........: " <<
+			yamp.getMetadata("title") << std::endl;
+		std::cout << "Artist..........: " <<
+			yamp.getMetadata("artist") << std::endl;
+		std::cout << "Type............: " <<
+			yamp.getMetadata("type_long") << std::endl;
+		std::cout << "Duration........: " <<
+			yamp.getDuration() << std::endl;
+		std::cout << "# of Channels...: " <<
+			yamp.getNumOf("channels") << std::endl;
+		std::cout << "# of Instruments: " <<
+			yamp.getNumOf("instruments") << std::endl;
+		std::cout << "# of Patterns...: " <<
+			yamp.getNumOf("patterns") << std::endl;
+		std::cout << "# of Samples....: " <<
+			yamp.getNumOf("samples") << std::endl;
+
 		yamp.play();
 
 		while (true) 
