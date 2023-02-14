@@ -7,6 +7,7 @@ namespace YAMP
         int sampleRate;
         int channels;
         int volume;
+        int repeat;
 
         static YAMP::YAMPOptions createDefault();
     };

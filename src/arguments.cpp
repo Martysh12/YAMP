@@ -13,6 +13,7 @@ error_t parseOption(int key, char* arg, argp_state* state)
     {
     case 'r':
         args->sampleRate = strtol(arg, &endptr, 10);
+        args->sampleRateSet = true;
         
         // Skip the strtol() check, sample rate <1000 will cause a seg-fault.
         if (args->sampleRate < 1000)
@@ -24,6 +25,7 @@ error_t parseOption(int key, char* arg, argp_state* state)
 
     case 'v':
         args->volume = strtol(arg, &endptr, 10);
+        args->volumeSet = true;
         
         if (errno != 0 && args->volume == 0 && arg == endptr)
         {
@@ -32,16 +34,30 @@ error_t parseOption(int key, char* arg, argp_state* state)
 
         break;
 
+    case 'l':
+        args->repeat = strtol(arg, &endptr, 10);
+        args->repeatSet = true;
+        
+        if ((args->repeat < -1) || (errno != 0 && args->repeat == 0 && arg == endptr))
+        {
+            argp_error(state, "invalid repeat count");
+        }
+
+        break;
+
     case 'm':
         args->channels = 1;
+        args->channelsSet = true;
         break;
 
     case 's':
         args->channels = 2;
+        args->channelsSet = true;
         break;
 
     case 'q':
         args->channels = 4;
+        args->channelsSet = true;
         break;
 
     case ARGP_KEY_ARG:
@@ -72,9 +88,10 @@ error_t parseOption(int key, char* arg, argp_state* state)
 }
 
 Arguments::Arguments(int argc, char* argv[]) :
-    sampleRate(-1),
-    channels(-1),
-    volume(INT_MIN)
+    sampleRateSet(false),
+    channelsSet(false),
+    volumeSet(false),
+    repeatSet(false)
 {
     std::string doc = "tracker music player";
     std::string argsDoc = "FILE";
@@ -82,10 +99,11 @@ Arguments::Arguments(int argc, char* argv[]) :
     argp_option options[] = {
         {"sample-rate", 'r', "RATE",   0, "Sample rate"},
         {"volume",      'v', "AMOUNT", 0, "Volume in decibel. Default: 0."},
-        {"mono",        'm', 0,      0, "1 channel"},
-        {"stereo",      's', 0,      0, "2 channels"},
-        {"quad",        'q', 0,      0, "4 channels"},
-        {0,             0,   0,      0, 0}
+        {"loop",        'l', "AMOUNT", 0, "Amount of repeats. Default: 0.\nIf set to -1, repeat forever."},
+        {"mono",        'm', 0,        0, "1 channel"},
+        {"stereo",      's', 0,        0, "2 channels"},
+        {"quad",        'q', 0,        0, "4 channels"},
+        {0,             0,   0,        0, 0}
     };
 
     argp parser = {options, parseOption, argsDoc.c_str(), doc.c_str()};
@@ -96,9 +114,10 @@ Arguments::Arguments(int argc, char* argv[]) :
 YAMP::YAMPOptions Arguments::createYAMPOptions()
 {
     YAMP::YAMPOptions options = YAMP::YAMPOptions::createDefault();
-    if (sampleRate != -1) options.sampleRate = sampleRate;
-    if (channels != -1)   options.channels = channels;
-    if (volume != INT_MIN)   options.volume = volume;
+    if (sampleRateSet) options.sampleRate = sampleRate;
+    if (channelsSet)   options.channels = channels;
+    if (volumeSet)     options.volume = volume;
+    if (repeatSet)     options.repeat = repeat;
 
     return options;
 }

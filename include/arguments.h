@@ -18,6 +18,12 @@ struct Arguments
     int sampleRate;
     int channels;
     int volume;
+    int repeat;
+
+    bool sampleRateSet;
+    bool channelsSet;
+    bool volumeSet;
+    bool repeatSet;
 
     Arguments(int argc, char* argv[]);
     YAMP::YAMPOptions createYAMPOptions();
