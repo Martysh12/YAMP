@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 
 	if (!file.is_open())
 	{
-		std::cout << "Couldn't open file " << std::quoted(argv[1]) << "." << std::endl;
+		std::cout << "Couldn't open file " << std::quoted(args.file) << "." << std::endl;
         return 1;
 	}
 
