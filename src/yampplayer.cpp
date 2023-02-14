@@ -82,3 +82,25 @@ void YAMP::YAMPPlayer::setHasFinished(bool hasFinished)
 {
     m_hasFinished = hasFinished;
 }
+
+std::string YAMP::YAMPPlayer::getMetadata(std::string key)
+{
+    return m_module.get_metadata(key);
+}
+
+double YAMP::YAMPPlayer::getDuration()
+{
+    return m_module.get_duration_seconds();
+}
+
+int YAMP::YAMPPlayer::getNumOf(std::string key)
+{
+    if (key == "channels") return m_module.get_num_channels();
+    if (key == "instruments") return m_module.get_num_instruments();
+    if (key == "orders") return m_module.get_num_orders();
+    if (key == "patterns") return m_module.get_num_patterns();
+    if (key == "samples") return m_module.get_num_samples();
+    if (key == "subsongs") return m_module.get_num_subsongs();
+
+    return 0;
+}

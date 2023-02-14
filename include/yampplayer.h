@@ -27,6 +27,11 @@ namespace YAMP
 
         bool hasFinished();
         void setHasFinished(bool hasFinished);
+
+        std::string getMetadata(std::string key);
+        double getDuration();
+
+        int getNumOf(std::string key);
     };
 };
 
