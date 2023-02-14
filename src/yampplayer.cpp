@@ -37,6 +37,8 @@ YAMP::YAMPPlayer::~YAMPPlayer()
 void YAMP::YAMPPlayer::play()
 {
     m_module.set_render_param(openmpt::module::RENDER_MASTERGAIN_MILLIBEL, m_options.volume * 100);
+    m_module.set_repeat_count(m_options.repeat);
+
     checkPaError(Pa_StartStream(m_stream));
 }
 
