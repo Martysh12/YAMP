@@ -30,6 +30,8 @@ namespace YAMP
 
         std::string getMetadata(std::string key);
         double getDuration();
+
+        int getNumOf(std::string key);
     };
 };
 
