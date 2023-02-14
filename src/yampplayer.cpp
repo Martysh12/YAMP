@@ -82,3 +82,8 @@ void YAMP::YAMPPlayer::setHasFinished(bool hasFinished)
 {
     m_hasFinished = hasFinished;
 }
+
+std::string getMetadata(std::string& key)
+{
+    return m_module.get_metadata(key);
+}
