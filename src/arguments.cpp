@@ -35,6 +35,13 @@ error_t parseOption(int key, char* arg, argp_state* state)
         break;
 
     case 'l':
+        if (arg == NULL)
+        {
+            args->repeat = -1;
+            args->repeatSet = true;
+            break;
+        }
+
         args->repeat = strtol(arg, &endptr, 10);
         args->repeatSet = true;
         
@@ -97,13 +104,13 @@ Arguments::Arguments(int argc, char* argv[]) :
     std::string argsDoc = "FILE";
 
     argp_option options[] = {
-        {"sample-rate", 'r', "RATE",   0, "Sample rate"},
-        {"volume",      'v', "AMOUNT", 0, "Volume in decibel. Default: 0."},
-        {"loop",        'l', "AMOUNT", 0, "Amount of repeats. Default: 0.\nIf set to -1, repeat forever."},
-        {"mono",        'm', 0,        0, "1 channel"},
-        {"stereo",      's', 0,        0, "2 channels"},
-        {"quad",        'q', 0,        0, "4 channels"},
-        {0,             0,   0,        0, 0}
+        {"sample-rate", 'r', "RATE",   0,                   "Sample rate"},
+        {"volume",      'v', "AMOUNT", 0,                   "Volume in decibel. Default: 0."},
+        {"loop",        'l', "AMOUNT", OPTION_ARG_OPTIONAL, "Amount of repeats. Default: 0.\nIf set to -1 or not set at all, repeat forever."},
+        {"mono",        'm', 0,        0,                   "1 channel"},
+        {"stereo",      's', 0,        0,                   "2 channels"},
+        {"quad",        'q', 0,        0,                   "4 channels"},
+        {0,             0,   0,        0,                   0}
     };
 
     argp parser = {options, parseOption, argsDoc.c_str(), doc.c_str()};
