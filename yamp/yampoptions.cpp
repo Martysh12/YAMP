@@ -107,13 +107,13 @@ YAMP::PlaybackOptions YAMP::PlaybackOptions::fromArguments(int argc, char** argv
     PlaybackOptions playbackOptions;
 
     argp_option options[] = {
-        {"sample-rate", 'r', "RATE",   0,                   "Sample rate",                                                                      0},
-        {"volume",      'v', "AMOUNT", 0,                   "Volume in decibel. Default: 0.",                                                   0},
-        {"loop",        'l', "AMOUNT", OPTION_ARG_OPTIONAL, "Amount of repeats. Default: 0.\nIf set to -1 or not set at all, repeat forever.",  0},
-        {"mono",        'm', 0,        0,                   "1 channel",                                                                        0},
-        {"stereo",      's', 0,        0,                   "2 channels",                                                                       0},
-        {"quad",        'q', 0,        0,                   "4 channels",                                                                       0},
-        {0,             0,   0,        0,                   0,                                                                                  0}
+        {"sample-rate", 'r', "RATE",   0,                   "sample rate",       0},
+        {"volume",      'v', "AMOUNT", 0,                   "volume in decibel", 0},
+        {"loop",        'l', "AMOUNT", OPTION_ARG_OPTIONAL, "amount of repeats", 0},
+        {"mono",        'm', 0,        0,                   "1 channel",         0},
+        {"stereo",      's', 0,        0,                   "2 channels",        0},
+        {"quad",        'q', 0,        0,                   "4 channels",        0},
+        {0,             0,   0,        0,                   0,                   0}
     };
 
     argp parser = {options, parseOption, argsDoc, doc, NULL, NULL, NULL};
