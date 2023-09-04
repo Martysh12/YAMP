@@ -10,8 +10,8 @@ namespace YAMP
 {
     class YAMPPlayer
     {
-        YAMPOptions& m_options;
-        openmpt::module m_module;
+        PlaybackOptions& m_options;
+        openmpt::module* m_module;
         PaStream* m_stream;
 
         bool m_hasFinished;
@@ -19,7 +19,7 @@ namespace YAMP
         void checkPaError(PaError err);
 
     public:
-        YAMPPlayer(std::istream& file, YAMPOptions& options);
+        YAMPPlayer(PlaybackOptions& options);
         ~YAMPPlayer();
 
         void play();

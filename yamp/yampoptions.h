@@ -1,14 +1,17 @@
 #pragma once
 
+#include <string>
+
 namespace YAMP
 {
-    struct YAMPOptions
+    struct PlaybackOptions
     {
-        int sampleRate;
-        int channels;
-        int volume;
-        int repeat;
+        std::string file;
+        unsigned int sampleRate = 44100;
+        unsigned int channels = 2;
+        int volume = 0;
+        int repeat = 0;
 
-        static YAMP::YAMPOptions createDefault();
+        static PlaybackOptions fromArguments(int argc, char** argv);
     };
 };
