@@ -12,12 +12,12 @@ const char* argsDoc = "FILE";
 static error_t parseOption(int key, char* arg, argp_state* state) {
     YAMP::PlaybackOptions* args = reinterpret_cast<YAMP::PlaybackOptions *>(state->input);
 
-    char const* invalid_what;
+    char const* error_msg;
 
     switch (key)
     {
     case 'r':
-        invalid_what = "sample rate";
+        error_msg = "invalid sample rate";
 
         try {
             args->sampleRate = std::stoi(arg);
@@ -33,7 +33,7 @@ static error_t parseOption(int key, char* arg, argp_state* state) {
         break;
 
     case 'v':
-        invalid_what = "volume";
+        error_msg = "invalid volume";
 
         try {
             args->volume = std::stoi(arg);
@@ -44,7 +44,7 @@ static error_t parseOption(int key, char* arg, argp_state* state) {
         break;
 
     case 'l':
-        invalid_what = "repeat";
+        error_msg = "invalid repeat";
 
         if (arg == NULL)
         {
@@ -99,7 +99,7 @@ static error_t parseOption(int key, char* arg, argp_state* state) {
     return 0;
 
 error:
-    argp_error(state, "invalid %s", invalid_what);
+    argp_error(state, error_msg);
     return 1;
 }
 
