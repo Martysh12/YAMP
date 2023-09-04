@@ -1,7 +1,6 @@
 #include "yampplayer.h"
 
 #include <fstream>
-#include <iomanip>
 
 void YAMP::YAMPPlayer::checkPaError(PaError err)
 {
@@ -20,8 +19,7 @@ YAMP::YAMPPlayer::YAMPPlayer(PlaybackOptions& options) :
 
     if (!f.is_open())
     {
-        std::cout << "Couldn't open file " << std::quoted(options.file) << "." << std::endl;
-        throw std::runtime_error("some error this will be revamped later");
+        throw std::runtime_error(std::string{"Couldn't open file \""} + options.file + '"');
     }
 
     m_module = new openmpt::module(f);
