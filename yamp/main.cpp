@@ -1,18 +1,15 @@
-#include "yampplayer.h"
+#include "player.h"
 
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <filesystem>
 
-int main(int argc, char* argv[])
-{
-
+int main(int argc, char* argv[]) {
 	YAMP::PlaybackOptions options = YAMP::PlaybackOptions::fromArguments(argc, argv);
 	
-	try
-	{
-		YAMP::YAMPPlayer yamp(options);
+	try {
+		YAMP::Player yamp(options);
 
 		// Print some info
 		std::cout << "Filename........: " <<
@@ -36,21 +33,16 @@ int main(int argc, char* argv[])
 
 		yamp.play();
 
-		while (true) 
-		{
-			if (yamp.hasFinished())
-			{
+		while (true) {
+			if (yamp.getHasFinished()) {
 				break;
 			}
 			// ui.render();
 		}
-	}
-	catch (std::exception& e)
-	{
+	} catch (std::exception& e) {
 		std::cout << "ERROR: " << e.what() << std::endl;
         return 1;
 	}
-	
 	
 	return 0;
 }

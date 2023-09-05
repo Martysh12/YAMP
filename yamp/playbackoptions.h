@@ -2,10 +2,8 @@
 
 #include <string>
 
-namespace YAMP
-{
-    struct PlaybackOptions
-    {
+namespace YAMP {
+    struct PlaybackOptions {
         std::string file;
         unsigned int sampleRate = 44100;
         unsigned int channels = 2;

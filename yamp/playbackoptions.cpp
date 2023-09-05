@@ -1,4 +1,4 @@
-#include "yampoptions.h"
+#include "playbackoptions.h"
 
 #include <argp.h>
 #include <stdexcept>
@@ -14,8 +14,7 @@ static error_t parseOption(int key, char* arg, argp_state* state) {
 
     char const* error_msg;
 
-    switch (key)
-    {
+    switch (key) {
     case 'r':
         error_msg = "invalid sample rate";
 
@@ -25,8 +24,7 @@ static error_t parseOption(int key, char* arg, argp_state* state) {
             goto error;
         }
         
-        if (args->sampleRate < 1000)
-        {
+        if (args->sampleRate < 1000) {
             goto error;
         }
 
@@ -46,8 +44,7 @@ static error_t parseOption(int key, char* arg, argp_state* state) {
     case 'l':
         error_msg = "invalid repeat";
 
-        if (arg == NULL)
-        {
+        if (arg == NULL) {
             args->repeat = -1;
             break;
         }
