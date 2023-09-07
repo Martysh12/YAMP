@@ -13,15 +13,19 @@ YAMP::Player::Player(PlaybackOptions& options) :
     }
 
     this->module = new openmpt::module(f);
+
+    this->backend = new YAMP::AudioBackend(this);
 }
 
 YAMP::Player::~Player() {
     delete this->module;
+    delete this->backend;
 }
 
 void YAMP::Player::play() {
     this->module->set_render_param(openmpt::module::RENDER_MASTERGAIN_MILLIBEL, this->options.volume * 100);
     this->module->set_repeat_count(this->options.repeat);
+    this->backend->start();
 }
 
 int YAMP::Player::readNextSamples(int bufferSize, float* buffer) {

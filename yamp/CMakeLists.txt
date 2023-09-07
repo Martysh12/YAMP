@@ -20,15 +20,15 @@ find_library(PULSEAUDIO pulseaudio)
 # Check for available audio backends
 if (PORTAUDIO)
     message(STATUS "portaudio audio backend found")
-    set(SOURCES ${SOURCES} audio_backends/portaudio.cpp)
+    set(SOURCES ${SOURCES} audio_backends/portaudio_backend.cpp)
     set(LIBS ${LIBS} portaudio)
 elseif(PULSEAUDIO)
     message(STATUS "pulseaudio audio backend found")
-    set(SOURCES ${SOURCES} audio_backends/pulseaudio.cpp)
+    set(SOURCES ${SOURCES} audio_backends/pulseaudio_backend.cpp)
     set(LIBS ${LIBS} pulseaudio)
 endif()
 
-# Add argp on Termux
+# Termux-specific
 if(ANDROID)
     set(LIBS ${LIBS} argp)
 endif()

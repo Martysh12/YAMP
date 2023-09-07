@@ -7,20 +7,24 @@
 #include <libopenmpt/libopenmpt.hpp>
 
 namespace YAMP {
+    class AudioBackend;
+
     class Player {
         PlaybackOptions& options;
+        AudioBackend* backend;
         openmpt::module* module;
 
-        bool hasFinished = false;
-
+        friend YAMP::AudioBackend;
     public:
         Player(PlaybackOptions& options);
         ~Player();
 
         void play();
-        int readNextSamples(int bufferSize, float* buffer);
 
+        bool hasFinished = false;
         bool getHasFinished();
+
+        int readNextSamples(int bufferSize, float* buffer);
 
         std::string getMetadata(std::string key);
         double getDuration();
