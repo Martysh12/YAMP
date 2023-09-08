@@ -18,6 +18,9 @@ static int yampPaCallback(const void* input, void* output, unsigned long frameCo
 	(void) timeInfo;
 	(void) statusFlags;
 
+	if (player->getHasFinished())
+		return 0;
+
 	player->readNextSamples(frameCount, outputFloat);
 
 	return 0;
