@@ -96,7 +96,7 @@ static error_t parseOption(int key, char* arg, argp_state* state) {
     return 0;
 
 error:
-    argp_error(state, error_msg);
+    argp_error(state, "%s", error_msg);
     return 1;
 }
 
