@@ -12,7 +12,6 @@ namespace YAMP {
 
 static int yampPaCallback(const void* input, void* output, unsigned long frameCount, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void* userData) {
 	YAMP::Player* player = reinterpret_cast<YAMP::Player *>(userData);
-	float* outputFloat = reinterpret_cast<float *>(output);
 
 	(void) input;
 	(void) timeInfo;
@@ -21,7 +20,7 @@ static int yampPaCallback(const void* input, void* output, unsigned long frameCo
 	if (player->getHasFinished())
 		return 0;
 
-	player->readNextSamples(frameCount, outputFloat);
+	player->readNextSamples(frameCount, reinterpret_cast<float *>(output));
 
 	return 0;
 }
