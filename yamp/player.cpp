@@ -29,28 +29,39 @@ void YAMP::Player::play() {
 }
 
 int YAMP::Player::readNextSamples(int bufferSize, float* buffer) {
+    int count;
+
     switch (this->options.channels) {
     case 1:
-        return this->module->read(
+        count = this->module->read(
             this->options.sampleRate,
             bufferSize,
             buffer
         );
+        break;
     case 2:
-        return this->module->read_interleaved_stereo(
+        count = this->module->read_interleaved_stereo(
             this->options.sampleRate,
             bufferSize,
             buffer
         );
+        break;
     case 4:
-        return this->module->read_interleaved_quad(
+        count = this->module->read_interleaved_quad(
             this->options.sampleRate,
             bufferSize,
             buffer
         );
+        break;
+    default:
+        count = 0;
+        break;
     }
 
-    return 0;
+    if (count == 0)
+        this->hasFinished = true;
+
+    return count;
 }
 
 bool YAMP::Player::getHasFinished() {

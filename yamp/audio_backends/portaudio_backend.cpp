@@ -18,9 +18,7 @@ static int yampPaCallback(const void* input, void* output, unsigned long frameCo
 	(void) timeInfo;
 	(void) statusFlags;
 
-	int samplesRead = player->readNextSamples(frameCount, outputFloat);
-	if (samplesRead == 0)
-		player->hasFinished = true;
+	player->readNextSamples(frameCount, outputFloat);
 
 	return 0;
 }
@@ -48,6 +46,7 @@ YAMP::AudioBackend::AudioBackend(Player* player) : player(player) {
 }
 
 YAMP::AudioBackend::~AudioBackend() {
+	this->stop();
 	checkPaError(Pa_CloseStream(dynamic_cast<YAMP::PortAudioState *>(YAMP::AudioBackend::state)->stream));
 	checkPaError(Pa_Terminate());
 }
